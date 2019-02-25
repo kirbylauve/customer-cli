@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //connect to db
-const db = mongoose.connect('mongodb://localhost:27017/customercli'
-);
+const db = mongoose.connect('mongodb://localhost:27017/customercli' /* , {
+    useMongoClient: true
+} */);
 
 //Import model
 
