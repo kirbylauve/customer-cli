@@ -1,9 +1,12 @@
 // using commander
 const program = require('commander');
-const {prompt}= require ('inquirer');
-const{
+const { prompt } = require('inquirer');
+const {
     addCustomer,
-    findCustomer
+    findCustomer,
+    updateCustomer,
+    removeCustomer,
+    listCustomers,
 } = require('./index');
 
 //Customer Questions
@@ -43,19 +46,30 @@ program
         addCustomer({firstname, lastname, phone, email});
     }); */
 
-program 
+//Adding commands
+program
     .command('add')
     .alias('a')
     .description('Add a customer')
     .action(() => {
         prompt(questions).then(answers => addCustomer(answers));
-        })
+    })
 
+//find command
+program
+    .command('find <name>')
+    .alias('f')
+    .description('Find a Customer')
+    .action(name => findCustomer(name));
 
-    program
-        .command('find <name>')
-        .alias('f')
-        .description('Find a Customer')
-        .action(name => findCustomer(name));
+//update
+program
+    .command('update <_id>')
+    .alias('u')
+    .description('Update a customer')
+    .action(_id => {
+        prompt(questions).then(answers => updateCustomer(_id, answers)); //you need the id first because that is what it is looking for in the action
+    })
+
 
 program.parse(process.argv); 

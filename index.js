@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //connect to db
-const db = mongoose.connect('mongodb://localhost:27017/customercli' /* , {
+const db = mongoose.connect('mongodb://localhost:27017/customercli', { 
+    useNewUrlParser: true} /* , {
     useMongoClient: true
 } */);
 
@@ -33,8 +34,39 @@ const findCustomer = (name) => {
         });
 }
 
+//Update Customer
+const updateCustomer = (_id, customer)=> {
+    Customer.update({ _id }, customer)
+    .then(customer => {
+        console.info('Customer Updated');
+        db.close();
+    });
+}
+
+//remove Customer
+const removeCustomer = (_id)=> {
+    Customer.remove({ _id })
+    .then(customer => {
+        console.info('Customer Removed');
+        db.close();
+    });
+}
+
+//List all customers
+const listCustomers = () => {
+    Customer.find()
+    .then(customers => {
+        console.info(customers);
+        console.info(`${customers.length} customers found`)
+        db.close();
+    });
+}
+
 //Export All Methods
 module.exports = {
     addCustomer,
-    findCustomer
+    findCustomer,
+    updateCustomer,
+    removeCustomer,
+    listCustomers
 }
