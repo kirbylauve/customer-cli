@@ -10,6 +10,8 @@
     "mongoose": "^5.4.15"
   },
   "devDependencies": {},
+  "preferGlobal": true,
+  "bin": "./commands.js", //npm link to call customer cli for interfase rather than node commands.js (command) 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
