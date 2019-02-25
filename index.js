@@ -1,20 +1,19 @@
 const mongoose = require('mongoose');
 
-//Map global promise - get rid of err
+//Map global promise - get rid of err depricated
 mongoose.Promise = global.Promise;
 
 //connect to db
-const db = mongoose.connect('mongodb://localhost:27017/customercli' ,{
-    useMongoClient: true
-});
+const db = mongoose.connect('mongodb://localhost:27017/customercli'
+);
 
 //Import model
 
-const Customer = require('./models/cistomer');
+const Customer = require('./models/customer');
 
 //Add customer
 const addCustomer = (customer) => { //use.then to get a response from a promise
-    Customer.create(customer).then(customer => {
+    Customer.create(customer).then(customer => {//create is a mongoose method resulting in a promise
         console.info('New Customer Added');
         db.close(); //must close db ir it will hang
     })

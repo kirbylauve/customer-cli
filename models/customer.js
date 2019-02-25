@@ -1,4 +1,4 @@
-const monguse = require('mongoose');
+const mongoose = require('mongoose');
 
 //Customer Scheema
 const customerSchema = mongoose.Schema({
@@ -9,4 +9,4 @@ const customerSchema = mongoose.Schema({
 });
 
 //Define and export
-module.export = mongoose.model('customer', customerSchema);
+module.exports = mongoose.model('Customer', customerSchema);
