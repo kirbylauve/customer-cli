@@ -71,5 +71,12 @@ program
         prompt(questions).then(answers => updateCustomer(_id, answers)); //you need the id first because that is what it is looking for in the action
     })
 
+    //remove
+    program
+    .command('remove <_id>')
+    .alias('r')
+    .description('Remove a Customer')
+    .action(_id => removeCustomer(_id));
+
 
 program.parse(process.argv); 

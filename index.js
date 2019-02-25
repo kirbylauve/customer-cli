@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //connect to db
-const db = mongoose.connect('mongodb://localhost:27017/customercli', { 
+const client = mongoose.connect('mongodb://localhost:27017/customercli', { 
     useNewUrlParser: true} /* , {
     useMongoClient: true
 } */);
@@ -17,7 +17,7 @@ const Customer = require('./models/customer');
 const addCustomer = (customer) => { //use.then to get a response from a promise
     Customer.create(customer).then(customer => {//create is a mongoose method resulting in a promise
         console.info('New Customer Added');
-        db.close(); //must close db ir it will hang
+        client.close(); //must close db ir it will hang
     })
 }
 
@@ -30,16 +30,16 @@ const findCustomer = (name) => {
         .then(customer => {
             console.info(customer);
             console.info(`${customer.length} matches`);
-            db.close();
+            client.close();
         });
 }
 
 //Update Customer
 const updateCustomer = (_id, customer)=> {
-    Customer.update({ _id }, customer)
+    Customer.update({ _id }, customer) //id is finding which one, customer is the data
     .then(customer => {
         console.info('Customer Updated');
-        db.close();
+        client.close();
     });
 }
 
@@ -48,7 +48,7 @@ const removeCustomer = (_id)=> {
     Customer.remove({ _id })
     .then(customer => {
         console.info('Customer Removed');
-        db.close();
+        client.close();
     });
 }
 
@@ -58,7 +58,7 @@ const listCustomers = () => {
     .then(customers => {
         console.info(customers);
         console.info(`${customers.length} customers found`)
-        db.close();
+        client.close();
     });
 }
 
